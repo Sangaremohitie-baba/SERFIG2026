@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>SERFIG 2026 — Confirmation de Présence</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Sora',sans-serif;background:#0a1628;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;
+  background-image:radial-gradient(ellipse at 20% 20%,rgba(30,95,168,0.15) 0%,transparent 60%),
+  radial-gradient(ellipse at 80% 80%,rgba(39,174,96,0.08) 0%,transparent 60%)}
+.logo{color:rgba(255,255,255,0.25);font-size:11px;font-weight:700;
+  letter-spacing:2px;text-align:center;margin-bottom:16px;text-transform:uppercase}
+.card{background:#131f2e;border-radius:28px;width:100%;max-width:400px;overflow:hidden;
+  box-shadow:0 40px 100px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.05);
+  animation:up .4s cubic-bezier(.16,1,.3,1)}
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.login-hdr{background:linear-gradient(135deg,#1a4a8a,#0d2d5c);padding:32px 24px 24px;text-align:center}
+.login-icon{font-size:48px;margin-bottom:12px}
+.login-title{font-size:20px;font-weight:800;color:#fff;margin-bottom:6px}
+.login-sub{font-size:12px;color:#90caf9;font-weight:500}
+.body{padding:24px}
+.field-wrap{margin-bottom:16px}
+.field-label{font-size:11px;font-weight:700;color:#90caf9;
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block}
+.field-input{width:100%;padding:14px 16px;background:#1a2840;border:2px solid #2d5a8e;
+  border-radius:14px;color:#e0f0ff;font-family:'Sora',sans-serif;font-size:14px;
+  font-weight:600;outline:none;transition:border-color .2s}
+.field-input:focus{border-color:#2d7dd2}
+.field-input::placeholder{color:#546e7a;font-weight:400}
+.hdr{background:linear-gradient(135deg,#1a4a8a,#0d2d5c);
+  padding:28px 24px 22px;text-align:center;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;top:-50px;right:-50px;
+  width:180px;height:180px;background:rgba(255,255,255,0.04);border-radius:50%}
+.badge-id{display:inline-block;background:rgba(255,255,255,0.12);color:#90caf9;
+  font-size:11px;font-weight:700;padding:5px 16px;border-radius:20px;
+  letter-spacing:1.5px;margin-bottom:16px;border:1px solid rgba(144,202,249,0.2);
+  position:relative;z-index:1}
+.avatar{width:78px;height:78px;border-radius:50%;
+  background:linear-gradient(135deg,#2d7dd2,#1a4a8a);
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;font-weight:800;color:#fff;margin:0 auto 12px;
+  border:3px solid rgba(255,255,255,0.15);
+  box-shadow:0 12px 32px rgba(0,0,0,0.4);position:relative;z-index:1}
+.nom-txt{font-size:21px;font-weight:800;color:#fff;position:relative;z-index:1}
+.body2{padding:22px}
+.infos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.info-box{background:#1a2840;border-radius:13px;padding:13px;border:1px solid rgba(255,255,255,0.05)}
+.lbl{font-size:9px;font-weight:700;color:#546e7a;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.val{font-size:13px;font-weight:700;color:#cfe8ff}
+.select-label{font-size:11px;font-weight:700;color:#90caf9;
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block}
+.select-session{width:100%;padding:13px 16px;background:#1a2840;border:2px solid #2d5a8e;
+  border-radius:14px;color:#e0f0ff;font-family:'Sora',sans-serif;font-size:14px;
+  font-weight:600;outline:none;cursor:pointer;appearance:none;margin-bottom:16px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2390caf9' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center}
+.select-session option{background:#1a2840;color:#e0f0ff}
+.org-info{background:#1a3a2a;border-radius:12px;padding:10px 14px;
+  margin-bottom:16px;font-size:12px;color:#81c784;font-weight:600}
+.btn{width:100%;padding:18px;border:none;border-radius:16px;
+  background:linear-gradient(135deg,#27ae60,#1a7a42);color:#fff;
+  font-family:'Sora',sans-serif;font-size:16px;font-weight:800;
+  cursor:pointer;transition:all .25s;box-shadow:0 8px 28px rgba(39,174,96,0.35)}
+.btn:hover:not(:disabled){transform:translateY(-3px)}
+.btn:disabled{background:linear-gradient(135deg,#1e3a2a,#162d21);
+  color:#3a6647;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-sec{margin-top:10px;width:100%;padding:10px;border:1px solid #2d5a8e;
+  border-radius:12px;background:transparent;color:#546e7a;
+  font-family:'Sora',sans-serif;font-size:12px;cursor:pointer}
+.btn-sec:hover{border-color:#ef5350;color:#ef5350}
+.spinner{display:none;text-align:center;padding:12px;color:#90caf9;font-size:13px}
+.spin{display:inline-block;animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+.result{display:none;text-align:center;padding:16px;border-radius:14px;margin-top:14px;font-size:14px;font-weight:700}
+.result.ok{background:#0d2b1a;color:#4caf50;border:1px solid rgba(76,175,80,0.25)}
+.result.err{background:#2b0d0d;color:#ef5350;border:1px solid rgba(239,83,80,0.25)}
+.result small{display:block;margin-top:4px;font-weight:400;opacity:.75;font-size:11px}
+.err-card{text-align:center;padding:50px 28px}
+.err-icon{font-size:52px;margin-bottom:14px}
+.err-title{font-size:19px;font-weight:800;color:#fff;margin-bottom:8px}
+.err-sub{color:#546e7a;font-size:13px;line-height:1.7}
+.loading{text-align:center;padding:60px 28px;color:#90caf9}
+.loading span{font-size:40px;animation:pulse 1s ease-in-out infinite;display:block;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="logo">◆ SERFIG 2026 ◆</div>
+<div class="card" id="app">
+  <div class="loading"><span>⏳</span>
+    <div style="font-size:14px;font-weight:600">Chargement...</div>
+  </div>
+</div>
+<script>
+var WEB_APP   = "https://script.google.com/macros/s/AKfycbxBvIcJfsNeTJ8eeWS1HlfGS-gf6HCbn1fQZetlsa84hQxrGrnKwsu5oFvlmOdvBxMb/exec";
+var TOKEN_KEY = "serfig_token";
+var NOM_KEY   = "serfig_nom";
+var pid       = new URLSearchParams(window.location.search).get("id") || "";
+
+window.onload = function() {
+  if (!pid) { afficherErreurPage("Aucun ID", "Scanne un badge valide."); return; }
+  var token = localStorage.getItem(TOKEN_KEY);
+  var nom   = localStorage.getItem(NOM_KEY);
+  if (token && nom) { chargerFiche(pid, token, nom); } else { afficherLogin(); }
+};
+
+function afficherLogin() {
+  document.getElementById("app").innerHTML =
+    '<div class="login-hdr"><div class="login-icon">🔐</div>' +
+    '<div class="login-title">Connexion Organisateur</div>' +
+    '<div class="login-sub">Identifiez-vous pour confirmer la présence</div></div>' +
+    '<div class="body">' +
+    '<div class="field-wrap"><span class="field-label">👤 Nom d\'utilisateur</span>' +
+    '<input class="field-input" type="text" id="username" placeholder="Nom d\'utilisateur"/></div>' +
+    '<div class="field-wrap"><span class="field-label">🔑 Mot de passe</span>' +
+    '<input class="field-input" type="password" id="password" placeholder="••••••••"/></div>' +
+    '<button class="btn" id="btnLogin" onclick="seConnecter()">🔓 Se connecter</button>' +
+    '<div class="spinner" id="spinLogin"><span class="spin">⏳ Vérification...</span></div>' +
+    '<div class="result" id="resLogin"></div></div>';
+}
+
+function seConnecter() {
+  var u = document.getElementById("username").value.trim();
+  var p = document.getElementById("password").value.trim();
+  if (!u || !p) { showErr("resLogin","Remplissez tous les champs !"); return; }
+  document.getElementById("btnLogin").disabled = true;
+  document.getElementById("spinLogin").style.display = "block";
+  fetch(WEB_APP + "?action=login&username=" + encodeURIComponent(u) + "&password=" + encodeURIComponent(p))
+    .then(function(r){return r.json();})
+    .then(function(r){
+      document.getElementById("spinLogin").style.display="none";
+      if(r.succes){
+        localStorage.setItem(TOKEN_KEY,r.token);
+        localStorage.setItem(NOM_KEY,r.nom);
+        chargerFiche(pid,r.token,r.nom);
+      } else {
+        document.getElementById("btnLogin").disabled=false;
+        showErr("resLogin",r.message);
+      }
+    })
+    .catch(function(){
+      document.getElementById("spinLogin").style.display="none";
+      document.getElementById("btnLogin").disabled=false;
+      showErr("resLogin","⚠️ Erreur de connexion. Réessayez.");
+    });
+}
+
+function chargerFiche(id,token,nom){
+  document.getElementById("app").innerHTML='<div class="loading"><span>⏳</span><div style="font-size:14px;font-weight:600">Chargement de la fiche...</div></div>';
+  fetch(WEB_APP+"?action=participant&id="+encodeURIComponent(id)+"&token="+encodeURIComponent(token))
+    .then(function(r){return r.json();})
+    .then(function(r){
+      if(!r.succes){if(r.reconnexion){localStorage.clear();afficherLogin();return;}afficherErreurPage(id,r.message);return;}
+      afficherFiche(r.participant,r.sessions,r.sessionActuelle,nom);
+    })
+    .catch(function(){afficherErreurPage(id,"Impossible de charger les données.");});
+}
+
+function afficherFiche(p,sessions,sessionActuelle,nom){
+  var initiale=p.prenom?p.prenom.charAt(0).toUpperCase():"?";
+  var sexeTxt=(p.sexe==="F"||p.sexe==="Féminin")?"👩 Féminin":"👨 Masculin";
+  var opts="";
+  sessions.forEach(function(s){opts+='<option value="'+s+'"'+(s===sessionActuelle?" selected":"")+'>'+s+'</option>';});
+  if(!sessions.length) opts='<option value="">Aucune session définie</option>';
+  document.getElementById("app").innerHTML=
+    '<div class="hdr"><div class="badge-id">'+p.id+'</div>' +
+    '<div class="avatar">'+initiale+'</div><div class="nom-txt">'+p.nom+' '+p.prenom+'</div></div>'+
+    '<div class="body2">'+
+    '<div class="org-info">✅ Connecté : <strong style="margin-left:4px">'+nom+'</strong></div>'+
+    '<div class="infos">'+
+    '<div class="info-box"><div class="lbl">Sous-comité</div><div class="val">📍 '+p.region+'</div></div>'+
+    '<div class="info-box"><div class="lbl">Dortoir</div><div class="val">🛏 '+p.dortoir+'</div></div>'+
+    '<div class="info-box"><div class="lbl">Sexe</div><div class="val">'+sexeTxt+'</div></div>'+
+    '<div class="info-box"><div class="lbl">ID</div><div class="val" style="font-size:11px">'+p.id+'</div></div>'+
+    '</div>'+
+    '<span class="select-label">📚 Choisir la session</span>'+
+    '<select class="select-session" id="selectSession">'+opts+'</select>'+
+    '<button class="btn" id="btnOK" onclick="confirmer(\''+p.id+'\')">✅ Confirmer la présence</button>'+
+    '<div class="spinner" id="spin"><span class="spin">⏳ Enregistrement...</span></div>'+
+    '<div class="result" id="res"></div>'+
+    '<button class="btn-sec" onclick="seDeconnecter()">🚪 Se déconnecter</button>'+
+    '</div>';
+}
+
+function confirmer(id){
+  var session=document.getElementById("selectSession").value;
+  var token=localStorage.getItem(TOKEN_KEY);
+  if(!session){alert("Choisissez une session !");return;}
+  if(!token){seDeconnecter();return;}
+  document.getElementById("btnOK").disabled=true;
+  document.getElementById("spin").style.display="block";
+  document.getElementById("res").style.display="none";
+  fetch(WEB_APP+"?action=presence&id="+encodeURIComponent(id)+"&session="+encodeURIComponent(session)+"&token="+encodeURIComponent(token))
+    .then(function(r){return r.json();})
+    .then(function(r){
+      document.getElementById("spin").style.display="none";
+      document.getElementById("res").style.display="block";
+      if(r.succes){
+        document.getElementById("res").className="result ok";
+        document.getElementById("res").innerHTML=r.message+'<small>'+r.session+' — '+r.heure+'<br>Par : '+r.organisateur+'</small>';
+        document.getElementById("btnOK").textContent="✅ Présence enregistrée";
+      } else {
+        document.getElementById("res").className="result err";
+        document.getElementById("res").innerHTML=r.message;
+        document.getElementById("btnOK").disabled=false;
+        if(r.reconnexion) seDeconnecter();
+      }
+    })
+    .catch(function(){
+      document.getElementById("spin").style.display="none";
+      showErr("res","⚠️ Erreur réseau. Réessayez.");
+      document.getElementById("btnOK").disabled=false;
+    });
+}
+
+function seDeconnecter(){
+  localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(NOM_KEY);
+  afficherLogin();
+}
+
+function afficherErreurPage(id,msg){
+  document.getElementById("app").innerHTML=
+    '<div class="err-card"><div class="err-icon">❌</div>'+
+    '<div class="err-title">Participant introuvable</div>'+
+    '<div class="err-sub">ID : <strong style="color:#ef5350">'+id+'</strong><br><br>'+msg+'</div></div>';
+}
+
+function showErr(id,msg){
+  var el=document.getElementById(id);
+  el.className="result err";
+  el.innerHTML=msg;
+  el.style.display="block";
+}
+</script>
+</body>
+</html>
